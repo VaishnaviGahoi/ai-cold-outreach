@@ -15,7 +15,9 @@ st.set_page_config(
 st.title("✉️ AI Cold Outreach Personalizer")
 st.caption("Paste your prospect list → fill in your details → get fully drafted, personalised messages in seconds.")
 
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+import os
+api_key = os.environ.get("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY", "")
+client = Groq(api_key=api_key)
 
 # ── Session State ────────────────────────────────────────────────────────────
 if "prospects_df" not in st.session_state:
